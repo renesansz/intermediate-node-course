@@ -37,30 +37,25 @@ app.listen(port, ()=>{
 app.post('/users',(req,res)=>{
   User.create(
     {...req.body.newData},
-    (err,data) => { sendResponse(res,err,data) }
+    (err,data)=>{sendResponse(res,err,data)}
   )
 })
 
 app.route('/users/:id')
-// READ
-.get((req,res)=>{
-  User.findById(req.params.id, (err,data) => { sendResponse(res,err,data) })
-})
-// UPDATE
-.put((req,res)=>{
-  User.findByIdAndUpdate(
-    req.params.id,
-    {...req.body.newData},
-    {
-      new:true
-    },
-    (err,data) => { sendResponse(res,err,data) }
-  )
-})
-// DELETE
-.delete((req,res)=>{
-  User.findByIdAndDelete(
-    req.params.id,
-    (err,data) => { sendResponse(res,err,data) }
-  )
-})
+  .get((req,res)=>{
+    User.findById(
+      req.params.id,
+      (err,data)=>{sendResponse(res,err,data)})
+  })
+  .put((req,res)=>{
+    User.findByIdAndUpdate(
+      req.params.id,
+      {...req.body.newData},
+      {new:true},
+      (err,data)=>{sendResponse(res,err,data)})
+  })
+  .delete((req,res)=>{
+    User.findByIdAndDelete(
+      req.params.id,
+      (err,data)=>{sendResponse(res,err,data)})
+  })
